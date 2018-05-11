@@ -35,7 +35,7 @@ function saveIssue(e) {
 function setStatusClosed(id) {
 	var issues = JSON.parse(localStorage.getItem('issues'));
 	
-	for (var i = 0; i < issues.length(); i++) {
+	for (var i = 0; i < issues.length; i++) {
 		if (issues[i].id == id) {
 			issues[i].status = 'Closed';
 		}
@@ -46,33 +46,48 @@ function setStatusClosed(id) {
     fetchIssues();
 }
 
+function deleteIssue(id) {
+    var issues = JSON.parse(localStorage.getItem('issues'));
+	
+	for (var i = 0; i < issues.length; i++) {
+		if (issues[i].id == id) {
+			issues.splice(i, 1);
+		}
+    }
+    
+    localStorage.setItem('issues', JSON.stringify(issues));
+
+    fetchIssues();
+
+}
+
 
 function fetchIssues() {
     var issues = JSON.parse(localStorage.getItem('issues'));
-	console.log(issues);
 	var bootstrap_enabled = (typeof $().modal == 'function');
-	console.log(bootstrap_enabled);
     var issuesList = document.getElementById('issuesList');
 	issuesList.innerHTML = '';
 
     for (var i = 0; i < issues.length; i++) {
-        var id = issues[i].id;
-        var desc = issues[i].description;
-        var severity = issues[i].severity;
-        var assignedTo = issues[i].assignedTo;
-        var status = issues[i].status;
+        //if (issues[i].status == 'Closed') {
+
+
+            var id = issues[i].id;
+            var desc = issues[i].description;
+            var severity = issues[i].severity;
+            var assignedTo = issues[i].assignedTo;
+            var status = issues[i].status;
 		
 
-        issuesList.innerHTML += '<div class="well">'+
-                                '<h6>Issue ID: ' + id + '<h6>'+
-                                '<p><span class="badge badge-info">'+ status + '</span></p>'+
-                                '<h3>' + desc + '</h3>'+
-                                '<p><span class="glyphicon glyphicon-time"></span>'+ severity + '</p>'+
-                                '<p><span class="glyphicon glyphicon-user"></span>'+ assignedTo + '</p>'+
-                                '<a href="#" onclick="setStatusClosed(\''+id+'\')" class="btn btn-warning">Close</a>'+
-                                '<a href="#" onclick="deleteIssue(\''+id+'\')" class="btn btn-danger">Delete</a>'+
-                                '</div>';
-
-
+            issuesList.innerHTML += '<div class="well">'+
+                                    '<h6>Issue ID: ' + id + '<h6>'+
+                                    '<p><span class="badge badge-info">'+ status + '</span></p>'+
+                                    '<h3>' + desc + '</h3>'+
+                                    '<p><span class="glyphicon glyphicon-time"></span>'+ severity + '</p>'+
+                                    '<p><span class="glyphicon glyphicon-user"></span>'+ assignedTo + '</p>'+
+                                    '<a href="#" onclick="setStatusClosed(\''+id+'\')" class="btn btn-warning">Close</a>'+
+                                    '<a href="#" onclick="deleteIssue(\''+id+'\')" class="btn btn-danger">Delete</a>'+
+                                    '</div>';
+        //}   
     }
 }
