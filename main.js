@@ -39,7 +39,11 @@ function setStatusClosed(id) {
 		if (issues[i].id == id) {
 			issues[i].status = 'Closed';
 		}
-	}
+    }
+    
+    localStorage.setItem('issues', JSON.stringify(issues));
+
+    fetchIssues();
 }
 
 
