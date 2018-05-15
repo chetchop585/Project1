@@ -1,0 +1,30 @@
+.wrapper{
+    display:grid;
+    grid-template-columns: 5% 95%;
+    background:rgba(43, 40, 40, 0.534);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper > div{                    
+    outline: 2px dashed blue;     
+}
+
+.content{
+    display: grid;
+    grid-template-rows: 30% 70%;
+}
+
+.content > div{
+    padding:1em;  
+    outline: 2px dashed rgb(194, 20, 20);                 
+}
+
+.content-upper{
+    background:rgb(17, 16, 16);
+}
+
+.content-lower{
+    background:rgb(15, 14, 14);
+}
